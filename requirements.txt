@@ -4,4 +4,4 @@ flask
 flask-cors
 PyYAML
 waitress
-werkzeug
+werkzeug==2.3.8
