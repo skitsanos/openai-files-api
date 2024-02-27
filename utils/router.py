@@ -5,6 +5,9 @@ from flask import request, jsonify, make_response
 
 
 def validate_token(secret_key: str):
+    if request.method == 'OPTIONS':
+        return make_response({}, 200)
+
     token = request.headers.get('Authorization')
     if not token or not token.startswith('Bearer '):
         return make_response({'error': {"message": "Token is missing or invalid"}}, 401)

@@ -1,8 +1,10 @@
 import os
+import shutil
 from uuid import uuid4
 
 from flask import request, make_response, g, current_app
 from openai import OpenAI
+from werkzeug.security import safe_join
 
 client = OpenAI()
 
@@ -47,7 +49,7 @@ def handler():
     files_uplodaded = []
 
     for file in request.files.getlist('file'):
-        path_to_file = os.path.join(uuid_path, file.filename)
+        path_to_file = safe_join(uuid_path, file.filename)
 
         if os.access(uuid_path, os.W_OK):
             file.save(path_to_file)
@@ -77,6 +79,6 @@ def handler():
             )
 
     # remove the directory after all files have been uploaded
-    os.rmdir(uuid_path)
+    shutil.rmtree(uuid_path)
 
     return files_uplodaded

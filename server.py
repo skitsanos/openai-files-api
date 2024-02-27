@@ -1,6 +1,7 @@
 import logging
 import os
 import socket
+import sys
 
 import yaml
 from flask import Flask, g, render_template, request, jsonify
@@ -53,7 +54,7 @@ if __name__ == '__main__':
             'DB_PASSWORD'
         ]):
             app.logger.error('Missing environment variables')
-            exit(1)
+            sys.exit(1)
 
     app.logger.info('Checking config...')
 
