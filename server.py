@@ -72,8 +72,8 @@ if __name__ == '__main__':
     app.logger.info('Routes loaded.')
 
     # Specify the host and port
-    host = os.getenv('BIND') or '0.0.0.0'
-    port = int(os.getenv('PORT') or '5000')
+    host = os.getenv('BIND') or config.get('server', {}).get('bind') or '0.0.0.0'
+    port = int(os.getenv('PORT') or config.get('server', {}).get('port') or '5000')
 
     # Start the Waitress server
     serve(app, host=host, port=port)
