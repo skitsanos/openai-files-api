@@ -1,0 +1,6 @@
+openai
+jsonschema
+flask
+flask-cors
+PyYAML
+waitress

@@ -1,0 +1,36 @@
+version: '3'
+
+env:
+  AUTH_TOKEN: YOUR_AUTH_TOKEN
+  DB_HOST: http://localhost:8529
+  DB_USERNAME: YOUR_USERNAME
+  DB_PASSWORD: YOUR_PASSWORD
+  DB_DATABASE: YOUR_DATABASE
+  OPENAI_API_KEY: YOUR_API_KEY
+
+vars:
+  DOCKER_TAG: skitsanos/openai-files-api
+
+tasks:
+  install:
+    cmds:
+      - cmd: pip install --upgrade pip
+      - cmd: pip install --upgrade virtualenv
+      - cmd: test -d .venv || virtualenv ./.venv
+      - cmd: ./.venv/bin/python -m pip install --upgrade pip
+      - cmd: ./.venv/bin/pip install --upgrade -r requirements.txt
+        platforms: [ darwin, linux ]
+      - cmd: .\.venv\Scripts\pip install --upgrade -r requirements.txt
+        platforms: [ windows ]
+
+  start:
+    cmds:
+      - cmd: .venv/bin/python server.py
+        platforms: [ darwin, linux ]
+      - cmd: .venv\Scripts\python server.py
+        platforms: [ windows ]
+
+  docker-build:
+    cmds:
+      - |
+        docker build --progress plain -t {{.DOCKER_TAG}} .

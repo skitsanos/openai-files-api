@@ -1,0 +1,5 @@
+.idea/
+.venv/
+.uploads/
+
+Taskfile.dev.yaml
