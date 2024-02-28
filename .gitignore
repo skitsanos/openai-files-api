@@ -3,3 +3,5 @@
 .uploads/
 
 Taskfile.dev.yaml
+
+*.service
