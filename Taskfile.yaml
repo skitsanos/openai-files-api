@@ -31,6 +31,12 @@ tasks:
       - cmd: .\.venv\Scripts\pip install --upgrade -r requirements.txt
         platforms: [ windows ]
 
+  clean:
+    internal: true
+    cmds:
+      - |
+        find . -name "__pycache__" -type d -delete
+
   start:
     cmds:
       - cmd: .venv/bin/python server.py
@@ -40,6 +46,7 @@ tasks:
 
   docker-build:
     cmds:
+      - task: clean
       - |
         docker build --progress plain -t {{.DOCKER_TAG}} .
 
