@@ -1,5 +1,5 @@
-import traceback
 from flask import current_app, make_response, request
+
 from components.openai.openai_summarizer import OpenAIFileReferenceSummarizer
 
 
@@ -22,8 +22,8 @@ def handler(file_id: str):
         )
         return result["documents"]
     except KeyError as e:
-        current_app.logger.error(f'KeyError: {str(e)}')
+        current_app.logger.error(f'KeyError: {e["message"]}')
         return make_response({"error": "KeyError occurred"}, 400)
     except Exception as e:
-        current_app.logger.error(f'An unexpected error occurred: {traceback.format_exc()}')
+        current_app.logger.error(f'An unexpected error occurred: {e["message"]}')
         return make_response({"error": "An unexpected error occurred"}, 500)
