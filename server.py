@@ -2,6 +2,7 @@ import logging
 import os
 import socket
 import sys
+from pathlib import Path
 
 import yaml
 from flask import Flask, g, render_template, request, jsonify
@@ -40,6 +41,7 @@ if __name__ == '__main__':
     )
 
     with app.app_context():
+        app.config.update({"APP_HOME": os.path.dirname(Path(__file__).resolve())})
         #
         # Checking environment variables
         #

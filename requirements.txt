@@ -5,3 +5,5 @@ flask-cors
 PyYAML
 waitress
 werkzeug==3.0.1
+haystack-ai
+fastembed

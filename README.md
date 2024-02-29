@@ -1,4 +1,6 @@
 # openai-files-api
+> OpenAI-driven File Manager and Summarizer
+
 
 This is a simple API to upload files into and interact with files from OpenAI's GPT engine.
 The API is built using Flask and uses the OpenAI Python library to interact with the OpenAI API.
@@ -86,3 +88,39 @@ The API has the following endpoints:
 
 > For the supported file types and the request and response formats, please refer to the OpenAPI documentation at
 https://platform.openai.com/docs/assistants/tools/supported-files.
+
+## Summarizing a File
+
+To summarize a file, you can use the `GET /api/files/<file_id>/summarize` endpoint. This endpoint is used to retrieve a
+summary of the text content from a specified file identified by its unique `file_id`.
+
+### Request
+
+- **Method**: `POST`
+- **URL**: `/api/files/<file_id>/summarize`
+#### Request Body
+
+The request body should be a JSON object with the following optional fields:
+
+1. `user_input` (string, default: "Summarize the text from the given file"):
+   - Specifies the user input for the summarization process. If not provided, a default message will be used.
+
+2. `instructions` (string, default: "You are a helpful assistant."):
+   - Provides instructions for the summarization task. If not provided, a default message will be used.
+
+3. `model` (string, default: "gpt-4-0125-preview"):
+   - Specifies the model to be used for summarization. If not provided, the default model specified in the server configuration will be used.
+
+### Response
+
+- **Success**: Returns a summary of the text content from the specified file.
+- **Error**: Returns an error message if an unexpected error occurs during the summarization process.
+
+#### Example Request
+
+```json
+{
+  "user_input": "Please summarize the main points of the document.",
+  "instructions": "Focus on key ideas and provide a concise summary.",
+  "model": "gpt-4-0125-preview"
+}
