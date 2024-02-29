@@ -12,7 +12,7 @@ from components.openai.openai_helpers import create_thread_and_run, wait_on_run,
 client = OpenAI()
 
 # https://platform.openai.com/docs/models
-DEFAULT_MODEL = "gpt-4-0125-preview"
+DEFAULT_MODEL = "gpt-3.5-turbo-1106"
 
 
 def summarize_text(text_to_summarize: str,

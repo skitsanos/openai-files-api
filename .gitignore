@@ -1,6 +1,7 @@
 .idea/
 .venv/
 .uploads/
+**/__pycache__
 
 Taskfile.dev.yaml
 

@@ -1,6 +1,9 @@
+import openai
 from flask import current_app, make_response, request
 
 from components.openai.openai_summarizer import OpenAIFileReferenceSummarizer
+
+DEFAULT_MODEL = "gpt-4-0125-preview"
 
 
 def handler(file_id: str):
@@ -11,7 +14,7 @@ def handler(file_id: str):
     instructions = json_data.get('instructions',
                                  "You are helpful assistant.") if json_data else "You are helpful assistant."
     model = json_data.get('model', current_app.config.get('openai', {}).get('model',
-                                                                            "gpt-4-0125-preview")) if json_data else "gpt-4-0125-preview"
+                                                                            DEFAULT_MODEL)) if json_data else DEFAULT_MODEL
 
     try:
         result = OpenAIFileReferenceSummarizer().run(
@@ -21,6 +24,11 @@ def handler(file_id: str):
             instructions=instructions
         )
         return result["documents"]
+
+    except openai.BadRequestError as openai_error:
+        current_app.logger.error(f'OpenAI Error: {openai_error.body["message"]}')
+        return make_response({"error": openai_error.body["message"]}, 400)
+
     except KeyError as e:
         current_app.logger.error(f'KeyError: {e["message"]}')
         return make_response({"error": "KeyError occurred"}, 400)

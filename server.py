@@ -74,6 +74,9 @@ if __name__ == '__main__':
 
     app.logger.info('Routes loaded.')
 
+    open_ai_model = config.get('openai', {}).get('model') or 'gpt-3.5-turbo-1106'
+    app.logger.info(f'Using OpenAI model: {open_ai_model}')
+
     # Specify the host and port
     host = os.getenv('BIND') or config.get('server', {}).get('bind') or '0.0.0.0'
     port = int(os.getenv('PORT') or config.get('server', {}).get('port') or '5000')
