@@ -28,7 +28,7 @@ server:
 
 cors:
   origins: "*"
-  methods: [ "GET", "POST", "PUT", "DELETE" ]
+  methods: [ "GET", "POST", "DELETE" ]
   allow_headers: [ "Content-Type", "Authorization" ]
 
 openai:
@@ -83,3 +83,6 @@ The API has the following endpoints:
 - `GET /api/files/<file_id>` - Get the details of a file
 - `GET /api/files/<file_id>/summarize` - Summarize the file using the OpenAI API
 - `DELETE /api/files/<file_id>` - Delete the file from the server
+
+> For the supported file types and the request and response formats, please refer to the OpenAPI documentation at
+https://platform.openai.com/docs/assistants/tools/supported-files.
