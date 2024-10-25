@@ -4,5 +4,5 @@ flask
 flask-cors
 PyYAML
 waitress
-werkzeug==3.0.5
+werkzeug==3.0.6
 haystack-ai
