@@ -4,9 +4,9 @@ flask
 flask-cors
 PyYAML
 waitress
-werkzeug==3.1.4
+werkzeug==3.1.5
 haystack-ai
 anyio>=4.4.0 # not directly required, pinned by Snyk to avoid a vulnerability
 zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
-werkzeug==3.1.4
+werkzeug==3.1.5
 haystack-ai
